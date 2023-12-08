@@ -9,7 +9,7 @@ const GifList = ({ content }) => {
     </div>
 
     <img className="p-4 img-fluid" src={ content.images.original.url } />
-    { console.log(content.title.trim())}
+    
     
   </div>
   )
