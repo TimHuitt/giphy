@@ -9,7 +9,7 @@ const App = () => {
   const [ limit, setLimit ] = useState('50')
   const [ query, setQuery ] = useState('search')
 
-  const handleRequest = async (query) => {
+  const handleRequest = async () => {
     try {
       const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=j1NX9kwdYBEpPxrd5A51p2Bl6470nFMY&q=${query}&limit=${limit}`
         

@@ -1,16 +1,22 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react";
 
-const SearchBar = ({ handleRequest, limit, setLimit, query, setQuery }) => {
-
+const SearchBar = ({
+  limit, 
+  setLimit, 
+  query, 
+  setQuery 
+}) => {
+  const [ localQuery, setLocalQuery ] = useState('')
+  
   const handleChange = (value) => {
-    setQuery(value)
+    setLocalQuery(value)
   }
   
   const handleSearch = (e) => {
     e.preventDefault()
-    handleRequest(query)
+    setQuery(localQuery)
   }
 
   const handleLimit = (e) => {
@@ -18,9 +24,13 @@ const SearchBar = ({ handleRequest, limit, setLimit, query, setQuery }) => {
     setLimit(e)
   }
 
-  const handleRandom = (e) => {
+  const handleRandom = async (e) => {
     e.preventDefault()
-    console.log('click')
+    const randomURL = `https://random-word-api.herokuapp.com/word`
+    const response = await fetch(randomURL)
+    const responseData = await response.json()
+    setQuery(responseData)
+    setLocalQuery(responseData)
   }
   
   return (
@@ -32,7 +42,7 @@ const SearchBar = ({ handleRequest, limit, setLimit, query, setQuery }) => {
         >
           <input
             className="form-control m-2"
-            value={query === 'search' ? '' : query}
+            value={localQuery}
             placeholder="SEEEEARRRCCCHHH!"
             onChange={(e) => handleChange(e.target.value)}
             required />
@@ -42,7 +52,7 @@ const SearchBar = ({ handleRequest, limit, setLimit, query, setQuery }) => {
           </button>
           <button
             className="btn btn-secondary inline m-2"
-            type="submit" onClick={(e) => handleRandom(e)}
+            type="button" onClick={(e) => handleRandom(e)}
           >
             Random!
           </button>
@@ -51,7 +61,7 @@ const SearchBar = ({ handleRequest, limit, setLimit, query, setQuery }) => {
 
       <div className="fixed-bottom d-flex justify-content-center m-5">
         <form className="search-limit">
-          <select value={limit} className="custom-select" onChange={(e) => handleLimit(e.target.value)}>
+          <select value={limit ? limit : "50"} className="custom-select" onChange={(e) => handleLimit(e.target.value)}>
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
