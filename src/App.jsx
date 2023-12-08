@@ -27,12 +27,18 @@ const App = () => {
   return (
     <>
       <Search handleRequest={handleRequest} />
-      <div>
-      {gifData.length ? (
-          gifData.map((i) => <GifList key={i.id} content={i.images.original.url} />)
-        ) : (
-          <p>No numbers yet</p>
-        )}
+      <div className="container">
+        <div className="row">
+          {gifData.length ? (
+            gifData.map((item) => (
+              <div key={item.id} className="col-md-6">
+                <GifList content={item.images.original.url} />
+              </div>
+            ))
+          ) : (
+            <p>No numbers yet</p>
+          )}
+        </div>
       </div>
     </>
   )

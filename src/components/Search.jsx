@@ -14,6 +14,7 @@ const Search = ({ handleRequest }) => {
     e.preventDefault()
     handleRequest(search)
   }
+  
   return (
     <form className="d-flex flex-row align-items-center" onSubmit={handleSearch}>
       <input className="form-control m-2" value={search} onChange={(e) => handleChange(e.target.value)} placeholder="SEEEEARRRCCCHHH!" required />
