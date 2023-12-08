@@ -1,3 +1,8 @@
-gif {
-  background: #222;
+.gif {
+  background: #4a4a4a;
+}
+.img-title {
+  color: white;
+  font-weight: bold;
+  margin-bottom: -20px;
 }
